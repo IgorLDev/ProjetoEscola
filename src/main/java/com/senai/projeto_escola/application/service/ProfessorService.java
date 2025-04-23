@@ -3,6 +3,8 @@ package com.senai.projeto_escola.application.service;
 import com.senai.projeto_escola.application.dto.ProfessorDto;
 import com.senai.projeto_escola.domain.entity.Professor;
 import com.senai.projeto_escola.domain.repository.ProfessorRepository;
+import com.senai.projeto_escola.domain.service.ValidadorCoordenador;
+import com.senai.projeto_escola.domain.service.ValidadorProfessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,11 @@ import java.util.Optional;
 public class ProfessorService {
     @Autowired
     private ProfessorRepository professorRepo;
+    @Autowired
+    private ValidadorProfessor validadorProfessor;
 
     public void salvar(ProfessorDto professorDto){
+        validadorProfessor.validar(professorDto);
         Professor professor = new Professor();
         professor.setNome(professorDto.nome());
         professor.setIdade(professorDto.idade());
@@ -44,6 +49,7 @@ public class ProfessorService {
     }
 
     public boolean atualizar(Long id, ProfessorDto professorDto){
+        validadorProfessor.validar(professorDto);
         return professorRepo.findById(id).map(p -> {
             p.setNome(professorDto.nome());
             p.setIdade(professorDto.idade());

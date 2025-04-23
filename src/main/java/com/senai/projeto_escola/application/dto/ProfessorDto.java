@@ -1,7 +1,6 @@
 package com.senai.projeto_escola.application.dto;
 
 import com.senai.projeto_escola.domain.entity.UnidadesCurriculares;
-import lombok.Data;
 
 import java.util.List;
 

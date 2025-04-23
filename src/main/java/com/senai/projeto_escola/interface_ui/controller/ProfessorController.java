@@ -1,6 +1,5 @@
 package com.senai.projeto_escola.interface_ui.controller;
 
-import com.senai.projeto_escola.application.dto.CoordenadorDto;
 import com.senai.projeto_escola.application.dto.ProfessorDto;
 import com.senai.projeto_escola.application.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;

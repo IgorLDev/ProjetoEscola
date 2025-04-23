@@ -5,6 +5,7 @@ import com.senai.projeto_escola.application.dto.ProfessorDto;
 import com.senai.projeto_escola.domain.entity.Coordenador;
 import com.senai.projeto_escola.domain.entity.Professor;
 import com.senai.projeto_escola.domain.repository.CoordenadorRepository;
+import com.senai.projeto_escola.domain.service.ValidadorCoordenador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,11 @@ import java.util.stream.Collectors;
 public class CoordenadorService {
     @Autowired
     private CoordenadorRepository coordenadorRepo;
+    @Autowired
+    private ValidadorCoordenador validadorCoordenador;
 
     public void salvar(CoordenadorDto coordenadorDto){
+        validadorCoordenador.validar(coordenadorDto);
         Coordenador coordenador = new Coordenador();
         coordenador.setNome(coordenadorDto.nome());
         coordenador.setIdade(coordenadorDto.idade());
@@ -69,6 +73,7 @@ public class CoordenadorService {
     }
 
     public boolean atualizar(Long id, CoordenadorDto coordenadorDto){
+        validadorCoordenador.validar(coordenadorDto);
         return coordenadorRepo.findById(id).map(c -> {
                 c.setNome(coordenadorDto.nome());
                 c.setIdade(coordenadorDto.idade());
